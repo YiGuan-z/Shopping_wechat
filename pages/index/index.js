@@ -24,21 +24,21 @@ Page({
 	},
 	//获取轮播图数据
 	getSwiperList: function () {
-		requst({url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata'})
+		requst({url: '/home/swiperdata'})
 			.then(res => {
 				this.setData({swiperList: res.data.message})
 			})
 	},
 	//获取导航栏数据
 	getCateList: function () {
-		requst({url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/catitems'})
+		requst({url: '/home/catitems'})
 			.then(res => {
 				this.setData({cateList: res.data.message})
 			})
 	},
 	//获取楼层数据
 	getfloorList: function () {
-		requst({url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/floordata'})
+		requst({url: '/home/floordata'})
 			.then(res => {
 				this.setData({floorList: res.data.message})
 			})

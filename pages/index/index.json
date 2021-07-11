@@ -2,5 +2,6 @@
   "usingComponents": {
     "SearchInput": "/components/SearchInput/SearchInput"
   },
-  "navigationBarTitleText": "首页"
+  "navigationBarTitleText": "首页",
+  "enablePullDownRefresh": true
 }
