@@ -23,24 +23,24 @@ Page({
 		this.getfloorList()
 	},
 	//获取轮播图数据
-	getSwiperList: function () {
+	getSwiperList() {
 		requst({url: '/home/swiperdata'})
 			.then(res => {
-				this.setData({swiperList: res.data.message})
+				this.setData({swiperList: res})
 			})
 	},
 	//获取导航栏数据
-	getCateList: function () {
+	getCateList() {
 		requst({url: '/home/catitems'})
 			.then(res => {
-				this.setData({cateList: res.data.message})
+				this.setData({cateList: res})
 			})
 	},
 	//获取楼层数据
-	getfloorList: function () {
+	 getfloorList() {
 		requst({url: '/home/floordata'})
 			.then(res => {
-				this.setData({floorList: res.data.message})
+				this.setData({floorList: res})
 			})
 	}
 });

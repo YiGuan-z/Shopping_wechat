@@ -6,7 +6,7 @@ export const requst = (params) => {
 			...params,
 			url: baseUrl+params.url,
 			success: (res) => {
-				resolve(res)
+				resolve(res.data.message)
 			},
 			fail: (err) => {
 				reject(err)
