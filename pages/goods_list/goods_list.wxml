@@ -1,3 +1,31 @@
 <SearchInput></SearchInput>
-<!--监听 自定义事件-->
-<tabs tabs="{{tabs}}" bindtabsItemChange="tabsItemChange"></tabs>
+        <!--监听 自定义事件-->
+<Tabs tabs="{{tabs}}" bindtabsItemChange="tabsItemChange">
+    <block wx:if="{{tabs[0].isActive}}">
+        <view class="first_tab">
+            <navigator class="goods_item"
+                       wx:for="{{goodsList}}"
+                       wx:for-index="index1"
+                       wx:for-item="item1"
+                       wx:key="goods_id">
+                <!--图片容器-->
+                <view class="goods_img_wrap">
+                    <image mode="widthFix"
+                           src="{{item1.goods_small_logo?item1.goods_small_logo:'../../icon/NoImg.jpg'}}"></image>
+                </view>
+                <!--商品容器-->
+                <view class="goods_info_wrap">
+                    <view class="good_name">
+                        {{item1.goods_name}}
+                    </view>
+                    <view class="goods_price">
+                        ¥{{item1.goods_price}}
+                    </view>
+
+                </view>
+            </navigator>
+        </view>
+    </block>
+    <block wx:elif="{{tabs[1].isActive}}">1</block>
+    <block wx:elif="{{tabs[2].isActive}}">2</block>
+</Tabs>

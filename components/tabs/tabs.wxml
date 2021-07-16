@@ -9,8 +9,6 @@
         </view>
     </view>
     <view class="tabs_content">
-        <block wx:if="{{tabs[0].isActive}}}">0</block>
-        <block wx:if="{{tabs[1].isActive}}}">1</block>
-        <block wx:if="{{tabs[2].isActive}}}">2</block>
+        <slot></slot>
     </view>
 </view>
