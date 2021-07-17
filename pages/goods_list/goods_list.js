@@ -1,5 +1,6 @@
 // pages/goods_list/goods_list.js
 import {requst} from "../../requst/index.js";
+// import {loading} from "../../utils/Loading.js"
 /*
 * 1.用户上滑页面，页面触底，开始加载下一页
 * 2.找到滚动条触底事件
@@ -8,6 +9,7 @@ import {requst} from "../../requst/index.js";
 * 1.触发下拉刷新事件 下拉刷新事件添加逻辑
 * 2.重置数据数组
 * 3.重置页码，设置为1
+* 5.数据回来了，关闭 等待效果
 * */
 Page({
 	
@@ -70,16 +72,25 @@ Page({
 	},
 	//获取商品列表数据
 	async getGoodsList() {
-		const res = await requst({url: '/goods/search', data: this.QueryParams})
+		await requst({url: '/goods/search', data: this.QueryParams})
+			.then(res => {
+				//获取总条数
+				const total = res.total;
+				//计算总页数
+				this.totalPages = Math.ceil(total / this.QueryParams.pagesize);
+				this.setData({goodsList: [...this.data.goodsList, ...res.goods]})
+			})
+		//关闭下拉刷新的窗口
+		wx.stopPullDownRefresh()
 		//获取总条数
-		const total = res.total;
+		// const total = res.total;
 		//计算总页数
-		this.totalPages = Math.ceil(total / this.QueryParams.pagesize);
+		// this.totalPages = Math.ceil(total / this.QueryParams.pagesize);
 		// .then(res => {
 		// 	this.setData({goodsList: res})
 		// })
 		//拼接了数组 ...为扩展运算符
-		this.setData({goodsList:[ ...this.data.goodsList,...res.goods]})
+		// this.setData({goodsList:[ ...this.data.goodsList,...res.goods]})
 	},
 	
 	/**
@@ -87,23 +98,40 @@ Page({
 	 * */
 	onReachBottom: function (options) {
 		//判断是否还有下一页
-		if(this.QueryParams.pagenum>=this.totalPages){
+		if (this.QueryParams.pagenum >= this.totalPages) {
 			//没有下一页数据
-			console.log("%c"+"没有下一页数据了","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
-			wx.showToast({title:'没有下一页数据',icon:'error'})
-		}else{
-			//还有下一页数据
-			console.log("%c"+"有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
+			// wx.showLoading({title: '加载中'})
+			console.log("%c" + "没有下一页了", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
+			//关闭加载
+			// setTimeout(()=> wx.hideLoading(),200*10)
+			
+			wx.showToast({title: '没有下一页了', icon: 'error'})
+			
+			
+		} else {
+			// 还有下一页数据
+			// wx.showLoading({title: '加载中'})
+			console.log("%c" + "有下一页数据", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
 			this.QueryParams.pagenum++;
 			this.getGoodsList();
+			// 关闭加载
+			// setTimeout(()=> wx.hideLoading(),200*10)
+			// wx.hideLoading();
 		}
-		console.log("页面触底")
+		
 		
 	},
 	/**
-	* 下拉刷新事件
-	* */
-	onPullDownRefresh:function(options, callback){
-		console.log("%c"+"刷新","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
-	}
+	 * 下拉刷新事件
+	 * */
+	onPullDownRefresh: function (options, callback) {
+		console.log("%c" + "刷新", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
+		//重置goodsList为空
+		this.setData({goodsList: []})
+		//重置页码
+		this.QueryParams.pagenum = 1;
+		//重新发送请求
+		this.getGoodsList();
+	},
+	
 })
