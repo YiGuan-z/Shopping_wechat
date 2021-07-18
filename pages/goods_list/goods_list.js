@@ -104,10 +104,7 @@ Page({
 			console.log("%c" + "没有下一页了", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
 			//关闭加载
 			// setTimeout(()=> wx.hideLoading(),200*10)
-			
 			wx.showToast({title: '没有下一页了', icon: 'error'})
-			
-			
 		} else {
 			// 还有下一页数据
 			// wx.showLoading({title: '加载中'})
