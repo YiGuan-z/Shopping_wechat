@@ -27,8 +27,14 @@
 *       5.总价格+=商品的单价*数量
 *       5.总价格+=商品的数量
 *       6.把计算结果后的价格和数量返回data
+* 6.商品的选中
+*   1.绑定change事件
+*   2.获取到被修改商品的对象
+*   3.商品对象中的选中状态，取反
+*   4.重新填充会data中和缓存中
+*   5.重新计算全选，总价格，总数量。
 * */
-import {chooseAddress, getSetting, openSetting} from '../../utils/asyncWx.js'
+import {chooseAddress/*, getSetting, openSetting*/} from '../../utils/asyncWx.js'
 
 Page({
 	
@@ -69,24 +75,12 @@ Page({
 		//如果数组长度为0就执行?后面的方法，否则就直接返回false
 		//黑马程序猿炫技中
 		// const allChecked=cart.length?cart.every(v=>v.checked):false;
-		let allChecked = true;
-		//商品的总价格 总数量
-		let totalPrice = 0;
-		let totalNum = 0;
-		cart.forEach(k => {
-			if (k.checked) {
-				totalPrice += k.num * k.goods_price;
-				totalNum += k.num;
-			} else {
-				allChecked = false;
-			}
-		})
-		//判断数组是否为空
-		allChecked = cart.length !== 0 ? allChecked : false;
-		//赋值
-		this.setData({address, cart, allChecked, totalPrice, totalNum});
+		// //赋值
+		// this.setData({address, cart, allChecked, totalPrice, totalNum});
+		this.setCart(cart)
+		this.setData({address})
 	},
-	//点击收货地址
+	//点击获取收货地址
 	async handleChooseAddress() {
 		try {
 			let address = await chooseAddress()
@@ -110,6 +104,39 @@ Page({
 		// 	}
 		// })
 		
+	},
+	//商品的单选
+	handleItemChange(e) {
+		//1.获取被修改商品的id
+		const goods_id = e.currentTarget.dataset.id;
+		// console.log(goods_id)
+		//2.获取购物车数组
+		let {cart} = this.data;
+		//3.通过索引找到被修改的商品对象
+		let index = cart.findIndex(v => v.goods_id === goods_id);
+		//4.选中状态取反
+		cart[index].checked = !cart[index].checked;
+		this.setCart(cart)
+	},
+	//设置购物车状态同时重新计算底部工具栏数据
+	setCart(cart) {
+		//计算商品价格
+		let allChecked = true;
+		//商品的总价格 总数量
+		let totalPrice = 0;
+		let totalNum = 0;
+		cart.forEach(k => {
+			if (k.checked) {
+				totalPrice += k.num * k.goods_price;
+				totalNum += k.num;
+			} else {
+				allChecked = false;
+			}
+		})
+		//判断数组是否为空
+		allChecked = cart.length !== 0 ? allChecked : false;
+		//5&6.把购物车数据重新填充回data&cache
+		this.setData({cart, totalPrice, totalNum, allChecked});
+		wx.setStorageSync("cart", cart);
 	}
-	
 })

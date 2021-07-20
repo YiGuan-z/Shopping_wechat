@@ -26,7 +26,7 @@
               wx:key="goods_id">
             <!--复选框-->
             <view class="cart_chk_warp">
-                <checkbox-group>
+                <checkbox-group data-id="{{item.goods_id}}" bindchange="handleItemChange">
                     <checkbox checked="{{item.checked}}"></checkbox>
                 </checkbox-group>
             </view>
@@ -55,7 +55,7 @@
     <!--全选-->
 
     <view class="all_chk_wrap">
-        <checkbox-group bindchange="">
+        <checkbox-group>
             <checkbox checked="{{allChecked}}">全选</checkbox>
         </checkbox-group>
     </view>
