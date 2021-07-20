@@ -1,2 +1,3 @@
 <!--pages/Search/Search.wxml-->
 <text>pages/Search/Search.wxml</text>
+<input value="{{SearchData}}"></input>

@@ -41,11 +41,11 @@
         <view>分享</view>
         <button open-type="share"></button>
     </view>
-    <navigator url="/pages/cart/cart?goods_id={{item.goods_id}}" class="tool_item" open-type="switchTab">
+    <navigator url="/pages/cart/cart" class="tool_item" open-type="switchTab">
         <view class="iconfont icon-gouwuche"></view>
         <view>购物车</view>
     </navigator>
-    <view class="tool_item btm_cart">
+    <view class="tool_item btm_cart" bindtap="handleCartAdd">
         加入购物车
     </view>
     <view class="tool_item btn_buy">

@@ -4,6 +4,13 @@
  * 2.点击轮播图 预览大图
  *  1.给轮播图添加点击事件
  *  2.调用api previewImage
+ * 3.点击加入购物车
+ *  1.绑定点击事件
+ *  2.获取缓存中的购物车数据
+ *  3.判断当前商品是否已经存在购物车
+ *  4.已经存在 修改商品数据 执行购物车数量++ 重新把购物车数组填充回缓存
+ *  5.不存在购物车数组中 直接给购物车数组添加一个新元素 新元素带上购买数量属性 重新把数组填充回缓存
+ *  6.弹出提示
  */
 import {requst} from "../../requst/index.js";
 
@@ -16,7 +23,7 @@ Page({
 		goodsObj: {}
 	},
 	/**
-	 * 商品对象
+	 * 商品对象初始化
 	 */
 	GoodsInfo: {},
 	/**
@@ -63,6 +70,26 @@ Page({
 			urls
 			
 		})
+	},
+	//点击加入购物车
+	handleCartAdd: function (e) {
+		//获取缓存中的数组
+		let cart = wx.getStorageSync('cart') || [];
+		//判断商品对象是否存在于购物车数组中
+		let index = cart.findIndex(v => v.goods_id === this.GoodsInfo.goods_id)
+		console.log(index)
+		if (index === -1) {
+			//数据不存在
+			this.GoodsInfo.num = 1;
+			cart.push(this.GoodsInfo);
+		} else {
+			//数据存在执行num++
+			cart[index].num++;
+		}
+		//把购物车重新添加回缓存中
+		wx.setStorageSync('cart', cart);
+		//弹窗提示
+		wx.showToast({title: '加入成功', icon: 'success', mask: true})
 	}
 	
 })
