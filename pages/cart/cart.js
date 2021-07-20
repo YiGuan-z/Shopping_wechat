@@ -10,6 +10,23 @@
 * 2.页面加载完毕
 *   1.获取本地存储中的数据
 *   2.把数据赋给data中的变量
+* 3.页面加载完毕
+*   1.获取缓存中的购物车数组
+*   2.把购物车数据填充到data中
+*   手动给goods_detail添加checked属性，默认为true
+*       num=1;
+*       checked=true;
+*   4.全选的实现
+*       1.onShow 获取缓存中的购物车数组
+*       2.根据购物车中的商品数据计算 所有的商品都被选中 全选就被选中
+*   5.商品总价格的计算
+*       1.都需要该商品被选中 才能拿来计算
+*       2.获取购物车数组
+*       3.遍历
+*       4.判断商品是否选中
+*       5.总价格+=商品的单价*数量
+*       5.总价格+=商品的数量
+*       6.把计算结果后的价格和数量返回data
 * */
 import {chooseAddress, getSetting, openSetting} from '../../utils/asyncWx.js'
 
@@ -19,7 +36,16 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		address: {}
+		//地址
+		address: {},
+		//商品的数组
+		cart: [],
+		//是否全部选中
+		allChecked: false,
+		//商品的总价
+		totalPrice: 0,
+		//商品的数量
+		totalNum: 0
 	},
 	
 	/**
@@ -33,8 +59,32 @@ Page({
 	* */
 	onShow: function () {
 		//获取缓存中的收货地址
-		const address = wx.getStorageSync('address')
-		this.setData({address});
+		const address = wx.getStorageSync('address');
+		//获取缓存中的购物车数据
+		const cart = wx.getStorageSync('cart') || [];
+		//计算全选
+		//ever 数组方法，会遍历就收一个回掉函数，如果每一个回调函数都返回true，
+		// 那么该函数返回true
+		//如果是一个空数组，返回值就是true
+		//如果数组长度为0就执行?后面的方法，否则就直接返回false
+		//黑马程序猿炫技中
+		// const allChecked=cart.length?cart.every(v=>v.checked):false;
+		let allChecked = true;
+		//商品的总价格 总数量
+		let totalPrice = 0;
+		let totalNum = 0;
+		cart.forEach(k => {
+			if (k.checked) {
+				totalPrice += k.num * k.goods_price;
+				totalNum += k.num;
+			} else {
+				allChecked = false;
+			}
+		})
+		//判断数组是否为空
+		allChecked = cart.length !== 0 ? allChecked : false;
+		//赋值
+		this.setData({address, cart, allChecked, totalPrice, totalNum});
 	},
 	//点击收货地址
 	async handleChooseAddress() {
