@@ -31,7 +31,8 @@
                 </checkbox-group>
             </view>
             <!--商品图片-->
-            <navigator class="cat_img_warp">
+            <navigator class="cat_img_warp" url="pages/goods_detail/goods_detail"
+                       open-type="switchTab">
                 <image src="{{item.goods_big_logo}}"
                        mode="widthFix"></image>
             </navigator>
@@ -41,9 +42,15 @@
                 <view class="goods_price_warp">
                     <view class="goods_price">¥{{item.goods_price}}</view>
                     <view class="cart_num_tool">
-                        <view class="num_edit">-</view>
+                        <view class="num_edit" bindtap="handleItemNumEdit"
+                              data-id="{{item.goods_id}}"
+                              data-operation="{{-1}}">-
+                        </view>
                         <view class="goods_num">{{item.num}}</view>
-                        <view class="num_edit">+</view>
+                        <view class="num_edit" bindtap="handleItemNumEdit"
+                              data-id="{{item.goods_id}}"
+                              data-operation="{{1}}">+
+                        </view>
                     </view>
                 </view>
             </view>
@@ -55,7 +62,7 @@
     <!--全选-->
 
     <view class="all_chk_wrap">
-        <checkbox-group>
+        <checkbox-group bindchange="handleItemAllCheck">
             <checkbox checked="{{allChecked}}">全选</checkbox>
         </checkbox-group>
     </view>
