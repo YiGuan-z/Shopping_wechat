@@ -21,30 +21,68 @@
 <view class="cart_content">
     <view class="cart_title">购物车</view>
     <view class="cart_main">
-        <view class="cart_item">
-            <!--复选框-->
-            <view class="cart_chk_warp">
-                <checkbox-group>
-                    <checkbox></checkbox>
-                </checkbox-group>
-            </view>
-            <!--商品图片-->
-            <navigator class="cat_img_warp">
-                <image src="http://image2.suning.cn/uimg/b2c/newcatentries/0070078057-000000000634917020_1_400x400.jpg"
-                       mode="widthFix"></image>
-            </navigator>
-            <!--商品信息-->
-            <view class="cat_info_warp">
-                <view class="goods_name">babbababb</view>
-                <view class="goods_price_warp">
-                    <view class="goods_price">¥999</view>
-                    <view class="cart_num_tool">
-                        <view class="num_edit">-</view>
-                        <view class="goods_num">10</view>
-                        <view class="num_edit">+</view>
+        <!--当cart数组长度不为0的时候显示商品信息-->
+        <block wx:if="{{cart.length!==0}}">
+            <view class="cart_item"
+                  wx:for="{{cart}}"
+                  wx:key="goods_id">
+                <!--复选框-->
+                <view class="cart_chk_warp">
+                    <checkbox-group data-id="{{item.goods_id}}" bindchange="handleItemChange">
+                        <checkbox checked="{{item.checked}}"></checkbox>
+                    </checkbox-group>
+                </view>
+                <!--商品图片-->
+                <navigator class="cat_img_warp" url="pages/goods_detail/goods_detail"
+                           open-type="switchTab">
+                    <image src="{{item.goods_big_logo}}"
+                           mode="widthFix"></image>
+                </navigator>
+                <!--商品信息-->
+                <view class="cat_info_warp">
+                    <view class="goods_name">{{item.goods_name}}</view>
+                    <view class="goods_price_warp">
+                        <view class="goods_price">¥{{item.goods_price}}</view>
+                        <view class="cart_num_tool">
+                            <view class="num_edit" bindtap="handleItemNumEdit"
+                                  data-id="{{item.goods_id}}"
+                                  data-operation="{{-1}}">-
+                            </view>
+                            <view class="goods_num">{{item.num}}</view>
+                            <view class="num_edit" bindtap="handleItemNumEdit"
+                                  data-id="{{item.goods_id}}"
+                                  data-operation="{{1}}">+
+                            </view>
+                        </view>
                     </view>
                 </view>
             </view>
+        </block>
+        <block wx:else>
+            <view class="hide_item">
+                <text class="hide_text">哎呀，购物车竟然是空的</text>
+            </view>
+        </block>
+    </view>
+</view>
+        <!--底部工具栏-->
+<view class="footer_tool">
+    <!--全选-->
+
+    <view class="all_chk_wrap">
+        <checkbox-group bindchange="handleItemAllCheck">
+            <checkbox checked="{{allChecked}}">全选</checkbox>
+        </checkbox-group>
+    </view>
+    <!--总价格-->
+    <view class="total_price_wrap">
+        <view class="total_price">
+            合计:<text class="total_price_text">¥{{totalPrice}}</text>
         </view>
+        <view>包含运费</view>
+    </view>
+    <!--结算-->
+    <view class="order_pay_wrap" bindtap="handlePay">
+        结算({{totalNum}})
     </view>
 </view>

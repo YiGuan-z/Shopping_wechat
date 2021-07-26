@@ -50,13 +50,6 @@ Page({
 		})
 		console.log(goodsObj)
 	},
-	
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function () {
-	
-	},
 	/**
 	 * 点击轮播图放大预览
 	 */
@@ -81,6 +74,7 @@ Page({
 		if (index === -1) {
 			//数据不存在
 			this.GoodsInfo.num = 1;
+			this.GoodsInfo.checked = true;
 			cart.push(this.GoodsInfo);
 		} else {
 			//数据存在执行num++
