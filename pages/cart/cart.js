@@ -51,9 +51,16 @@
 *       弹窗提示wx.showModal是否删除
 *           确定 执行删除
 *           取消 关闭对话框
+* 9.点击结算
+*   1.判断有没有收货地址
+*   2.判断用户有没有选购
+*   3.经过验证后跳转到支付页面
+*   4.
+*   5.
+*   6.
 *   7.
 * */
-import {chooseAddress, showModal/*, getSetting, openSetting*/} from '../../utils/asyncWx.js'
+import {chooseAddress, showModal, showToast/*, getSetting, openSetting*/} from '../../utils/asyncWx.js'
 
 Page({
 	
@@ -193,5 +200,24 @@ Page({
 			//设置回缓存和data
 			this.setCart(cart)
 		}
+	},
+	//点击结算的功能
+	async handlePay() {
+		//判断收货地址
+		const {address, totalNum} = this.data;
+		if (!address.userName) {
+			await showToast({title: '您还没有添加收货地址'})
+			return;
+		}
+		//判断用户有没有选购商品
+		if (totalNum === 0) {
+			await showToast({title: '您还没有选购商品'})
+			return;
+		}
+		//跳转到支付页面
+		wx.navigateTo({
+			url: '/pages/pay/pay'
+		})
+		
 	}
 })

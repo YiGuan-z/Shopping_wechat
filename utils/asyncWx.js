@@ -26,6 +26,10 @@ export const chooseAddress = () => {
 		})
 	})
 }
+/**
+ * 打开设置页面
+ * @returns {Promise<openSetting>}
+ */
 export const openSetting = () => {
 	return new Promise((resolve, reject) => {
 		wx.openSetting({
@@ -49,6 +53,20 @@ export const showModal = ({content}) => {
 		wx.showModal({
 			title: '提示',
 			content: content,
+			success: (res) => {
+				resolve(res);
+			},
+			fail: (err) => {
+				reject(err)
+			}
+		})
+	})
+}
+export const showToast = ({title}) => {
+	return new Promise((resolve, reject) => {
+		wx.showToast({
+			title: title,
+			icon: 'none',
 			success: (res) => {
 				resolve(res);
 			},

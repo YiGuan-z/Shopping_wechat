@@ -1,28 +1,18 @@
-// pages/Search/Search.js
-import {requst} from "../../requst/index.js";
-
+// pages/search/search.js
 Page({
 	
 	/**
 	 * 页面的初始数据
 	 */
-	data: {
-		SearchData: {},
-		query: '',
-	},
+	data: {},
 	
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		this.getGoodsQsearch(options)
+	
 	},
-	async getGoodsQsearch(e) {
-		await requst({url: '/goods/qsearch', data: this.query})
-			.then(res => {
-				this.setData({SearchData: res})
-			})
-	},
+	
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
