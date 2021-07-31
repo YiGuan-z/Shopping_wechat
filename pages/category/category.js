@@ -20,7 +20,7 @@ Page({
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function (options) {
+	onLoad: function () {
 		/*
 		1.异步请求获取数据
 		2.获取分类数据
@@ -67,7 +67,7 @@ Page({
 		//使用es7的async发送异步请求
 		// const res=await requst({url: '/categories/'});
 		// this.Cates = res;
-		this.Cates = await requst({url: '/categories/'});
+		this.Cates = await requst({url: '/categories'});
 		//把接口的数据存入本地
 		wx.setStorageSync("cates", {time: Date.now(), data: this.Cates})
 		//构造左侧菜单数据

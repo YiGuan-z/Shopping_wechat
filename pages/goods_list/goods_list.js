@@ -1,6 +1,5 @@
 // pages/goods_list/goods_list.js
 import {requst} from "../../requst/index.js";
-// import {loading} from "../../utils/Loading.js"
 /*
 * 1.用户上滑页面，页面触底，开始加载下一页
 * 2.找到滚动条触底事件
@@ -96,7 +95,7 @@ Page({
 	/**
 	 * 生命周期函数--监听页面上拉触底事件
 	 * */
-	onReachBottom: function (options) {
+	onReachBottom: function () {
 		//判断是否还有下一页
 		if (this.QueryParams.pagenum >= this.totalPages) {
 			//没有下一页数据
@@ -121,7 +120,7 @@ Page({
 	/**
 	 * 下拉刷新事件
 	 * */
-	onPullDownRefresh: function (options, callback) {
+	onPullDownRefresh: function () {
 		console.log("%c" + "刷新", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
 		//重置goodsList为空
 		this.setData({goodsList: []})
