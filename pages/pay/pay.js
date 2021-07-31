@@ -5,11 +5,16 @@
  *      2.企业账号的小程序后台中 必须给开发者添加白名单
  *      3.一个appid可以同时绑定多个开发者
  *      4.这些开发者就可以公用appid
- * 3.
+ * 3.支付按钮
+ *      1.判断用户缓存中存不存在token
+ *      2.没有token 跳转到用户授权页面
+ *      3.有token后放行逻辑
+ *      4.创建订单
  * 4.
  * 5.
  */
-// import {chooseAddress, showModal, showToast/*, getSetting, openSetting*/} from '../../utils/asyncWx.js'
+import {showToast} from '../../utils/asyncWx.js'
+import {requst} from "../../requst/index.js"
 
 Page({
 	
@@ -61,6 +66,40 @@ Page({
 		//判断数组是否为空
 		//5&6.把购物车数据重新填充回data&cache
 		this.setData({cart, totalPrice, totalNum, address});
+	},
+	async handleOrderPay() {
+		//获取用户token
+		const token = wx.getStorageSync('token')
+		//判断
+		if (!token) {
+			wx.navigateTo({
+				url: "/pages/auth/auth"
+			})
+			return;
+		}
+		//创建订单
+		//请求头参数
+		const header = {Authorization: token};
+		//请求体参数
+		//订单价格
+		const order_price = this.data.totalPrice;
+		//收货地址
+		const consignee_addr = this.data.address.all;
+		//订单数组
+		const cart = this.data.cart;
+		let goods = [];
+		cart.forEach(v => goods.push({
+			goods_id: v.goods_id,
+			goods_number: v.num,
+			goods_price: v.goods_price,
+		}))
+		const orderParams = {order_price, consignee_addr, goods}
+		//准备发送请求创建订单，获取订单编号
+		const res = await requst({url: '/my/orders/create', header, data: orderParams, method: 'post'})
+		console.log(res);
+		//没有企业账号，模拟支付成功
+		const Pay = await showToast({title: '您已支付成功'})
+		console.log(Pay)
 	}
 	
 })

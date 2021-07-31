@@ -13,6 +13,7 @@ export const requst = (params) => {
 			url: baseUrl + params.url,
 			success: (res) => {
 				resolve(res.data.message)
+				console.log(res)
 			},
 			fail: (err) => {
 				reject(err)

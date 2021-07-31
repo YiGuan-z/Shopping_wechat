@@ -1,2 +1,2 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<button type="primary" plain bindtap="handleGetUserInfo" wx:if="{{!userInfo.nickName}}">登陆</button>

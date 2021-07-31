@@ -1,1 +1,7 @@
 /* pages/login/login.wxss */
+button {
+    margin-top: 40rpx;
+    width: 70%;
+}
+
+/*# sourceMappingURL=login.wxss.map */

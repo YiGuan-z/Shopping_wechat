@@ -76,3 +76,37 @@ export const showToast = ({title}) => {
 		})
 	})
 }
+/**
+ *
+ *
+ * @returns {Promise<login>}
+ */
+export const login = () => {
+	return new Promise((resolve, reject) => {
+		wx.login({
+			timeout: 100 * 100,
+			success: (result) => {
+				resolve(result);
+			},
+			fail: (err) => {
+				reject(err);
+			}
+		})
+	})
+}
+//获取用户信息
+export const getUserProfile = ({desc}) => {
+	return new Promise((resolve, reject) => {
+		wx.getUserProfile({
+			desc: desc,
+			success: (res) => {
+				resolve(res.userInfo)
+			},
+			fail: (err) => {
+				reject(err)
+				console.log(err)
+			}
+		})
+	})
+}
+
