@@ -1,5 +1,5 @@
 // pages/user/user.js
-import {getUserProfile} from "../../utils/asyncWx";
+import {getUserProfile, showToast} from "../../utils/asyncWx";
 
 Page({
 	
@@ -39,6 +39,17 @@ Page({
 		} catch (err) {
 			console.log(err)
 		}
+	},
+	//清除用户状态
+	handleLoginOut() {
+		this.setData({
+			userInfo: {},
+			hasUserInfo: false
+		})
+		wx.setStorageSync('userInfo', "")
+		setTimeout(() => {
+			showToast({title: '退出成功'})
+		}, 10 * 10)
 	}
 	
 	

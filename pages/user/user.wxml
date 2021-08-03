@@ -70,5 +70,6 @@
         </view>
         <!--推荐-->
         <view class="recommend_wrap">把这个应用推荐给其他人</view>
+        <button wx:if="{{userInfo.nickName}}" type="primary" bindtap="handleLoginOut">退出登陆</button>
     </view>
 </view>
