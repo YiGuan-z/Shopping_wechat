@@ -23,24 +23,33 @@ Page({
 		this.getfloorList()
 	},
 	//获取轮播图数据
-	getSwiperList() {
+	async getSwiperList() {
 		requst({url: '/home/swiperdata'})
 			.then(res => {
+				// res.forEach(v => {
+				// 	v.navigator_url = v.navigator_url.replace('main', 'goods_detail')
+				// })
 				this.setData({swiperList: res})
 			})
 	},
 	//获取导航栏数据
-	getCateList() {
+	async getCateList() {
 		requst({url: '/home/catitems'})
 			.then(res => {
 				this.setData({cateList: res})
 			})
 	},
 	//获取楼层数据
-	 getfloorList() {
+	async getfloorList() {
 		requst({url: '/home/floordata'})
 			.then(res => {
+				res.forEach(v1 => {
+					v1.product_list.forEach(v2 => {
+						v2.navigator_url = v2.navigator_url.replace(/\?/, '/goods_list\?')
+					})
+				})
 				this.setData({floorList: res})
 			})
 	}
+	
 });

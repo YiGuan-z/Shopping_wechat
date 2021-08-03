@@ -38,8 +38,8 @@
     "showES6CompileOption": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.18.1",
-  "appid": "wxf2b51bcbd2d926ad",
+  "libVersion": "2.19.0",
+  "appid": "wx150c3eb769faa435",
   "projectname": "test002",
   "debugOptions": {
     "hidedInDevtools": []

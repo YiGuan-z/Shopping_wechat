@@ -6,7 +6,8 @@
     <view class="index_swiper">
         <swiper autoplay="true" indicator-dots="true" circular="true">
             <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
-                <navigator>
+                <navigator url="/pages/goods_detail/goods_detail?goods_id={{item.goods_id}}"
+                           open-type="{{item.open_type}}">
                     <image mode="widthFix" src="{{item.image_src}}"></image>
                 </navigator>
             </swiper-item>
@@ -15,8 +16,9 @@
     <!--轮播图结束-->
     <!--导航开始-->
     <view class="index_cate">
-        <navigator wx:for="{{cateList}}" wx:key="name">
-            <image mode="widthFix" src="{{item.image_src}}"></image>
+        <navigator wx:for="{{cateList}}" wx:for-item="item4" wx:key="name" url="/pages/category/category"
+                   open-type="{{item4.open_type}}">
+            <image mode="widthFix" src="{{item4.image_src}}"></image>
         </navigator>
     </view>
     <!--导航结束-->
@@ -36,7 +38,9 @@
                 <navigator wx:for="{{item1.product_list}}"
                            wx:for-item="item2"
                            wx:for-index="index2"
-                           wx:key="name">
+                           wx:key="name"
+                           url="{{item2.navigator_url}}"
+                           open-type="{{item2.open_type}}">
                     <image mode="{{index2===0?'widthFix':'scaleToFill'}}" src="{{item2.image_src}}"></image>
                 </navigator>
             </view>

@@ -22,7 +22,6 @@
  *      3.不存在，把该商品加入收藏数组中，再存入缓存
  */
 import {requst} from "../../requst/index.js";
-import {showToast} from "../../utils/asyncWx";
 
 Page({
 	
@@ -42,7 +41,7 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onShow: function () {
-		//或得当前页面栈
+		//获得当前页面栈
 		let pages = getCurrentPages();
 		let currentPage = pages[pages.length - 1];
 		let options = currentPage.options;
@@ -134,9 +133,13 @@ Page({
 		
 	},
 	//立即购买
-	handleCartPurchase: function (e) {
-	
-	
+	handleCartPurchase() {
+		let pages = getCurrentPages();
+		let currentPage = pages[pages.length - 1];
+		let options = currentPage.options;
+		let {goods_id} = options;
+		console.log(goods_id)
+		
 	}
 	
 })
