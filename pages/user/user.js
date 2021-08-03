@@ -17,16 +17,11 @@ Page({
 	},
 	
 	
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
-	onLoad: function (options) {
-	},
 	
 	onShow() {
 		//商品收藏数量
-		let CollectNum = wx.getStorageSync('collect').length;
-		let userInfo = wx.getStorageSync('userInfo') || [];
+		const CollectNum = wx.getStorageSync('collect').length;
+		const userInfo = wx.getStorageSync('userInfo') || [];
 		if (JSON.stringify(userInfo).length === '{}') {
 			return;
 		} else {
