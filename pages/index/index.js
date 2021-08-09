@@ -24,32 +24,23 @@ Page({
 	},
 	//获取轮播图数据
 	async getSwiperList() {
-		requst({url: '/home/swiperdata'})
-			.then(res => {
-				// res.forEach(v => {
-				// 	v.navigator_url = v.navigator_url.replace('main', 'goods_detail')
-				// })
-				this.setData({swiperList: res})
-			})
+		const swiperList = await requst({url: '/home/swiperdata'})
+		this.setData({swiperList})
 	},
 	//获取导航栏数据
 	async getCateList() {
-		requst({url: '/home/catitems'})
-			.then(res => {
-				this.setData({cateList: res})
-			})
+		const cateList = await requst({url: '/home/catitems'})
+		this.setData({cateList})
 	},
 	//获取楼层数据
 	async getfloorList() {
-		requst({url: '/home/floordata'})
-			.then(res => {
-				res.forEach(v1 => {
-					v1.product_list.forEach(v2 => {
-						v2.navigator_url = v2.navigator_url.replace(/\?/, '/goods_list\?')
-					})
-				})
-				this.setData({floorList: res})
+		const floorList = await requst({url: '/home/floordata'})
+		floorList.forEach(v => {
+			v.product_list.forEach(v2 => {
+				v2.navigator_url = v2.navigator_url.replace(/\?/, '/goods_list\?')
 			})
+		})
+		this.setData({floorList})
 	}
 	
 });

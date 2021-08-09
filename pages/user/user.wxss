@@ -1,144 +1,123 @@
 page {
-    background-color: var(--white);
+  background-color: var(--white);
 }
-
 .user_info_wrap {
-    height: 45vh;
-    overflow: hidden;
-    background-color: var(--themeColor);
+  height: 45vh;
+  overflow: hidden;
+  background-color: var(--themeColor);
 }
-
 .user_info_wrap .user_img_wrap {
-    position: relative;
+  position: relative;
 }
-
 .user_info_wrap .user_img_wrap .user_bg {
-    height: 50vh;
-    filter: blur(10rpx);
-    transform: scale(1.1);
+  height: 50vh;
+  filter: blur(10rpx);
+  transform: scale(1.1);
 }
-
 .user_info_wrap .user_img_wrap .user_info {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 20%;
-    text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20%;
+  text-align: center;
 }
-
 .user_info_wrap .user_img_wrap .user_info .user_icon {
-    width: 150rpx;
-    height: 150rpx;
-    border-radius: 50%;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
 }
-
 .user_info_wrap .user_img_wrap .user_info .user_name {
-    color: #cccccc;
-    margin-top: 40rpx;
-    font-size: 40rpx;
+  color: #cccccc;
+  margin-top: 40rpx;
+  font-size: 40rpx;
 }
-
 .user_info_wrap .user_img_wrap .user_info .user_btn button {
-    font-size: 38rpx;
+  font-size: 38rpx;
 }
-
 .user_content {
-    position: relative;
+  position: relative;
 }
-
 .user_content .user_main {
-    position: absolute;
-    width: 90%;
-    left: 50%;
-    transform: translateX(-50%);
-    top: -40rpx;
-    color: #666;
-    padding-bottom: 100rpx;
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -40rpx;
+  color: #666;
+  padding-bottom: 100rpx;
 }
-
 .user_content .user_main .history_wrap {
-    border-radius: 100rpx;
-    background-color: var(--white);
-    display: flex;
+  border-radius: 100rpx;
+  background-color: var(--white);
+  display: flex;
 }
-
 .user_content .user_main .history_wrap navigator {
-    flex: 1;
-    text-align: center;
-    padding: 10rpx 0;
+  flex: 1;
+  text-align: center;
+  padding: 10rpx 0;
 }
-
 .user_content .user_main .history_wrap navigator .his_num {
-    color: var(--themeColor);
+  color: var(--themeColor);
 }
-
 .user_content .user_main .history_wrap navigator .his_name {
-    color: black;
+  color: black;
 }
-
 .user_content .user_main .orders_wrap {
-    background-color: var(--white);
-    margin-top: 30rpx;
-    border-radius: 20rpx;
-    font-weight: 600;
+  background-color: var(--white);
+  margin-top: 30rpx;
+  border-radius: 20rpx;
+  font-weight: 600;
 }
-
 .user_content .user_main .orders_wrap .orders_title {
-    padding: 20rpx;
-    border-bottom: 1rpx solid var(--white);
+  padding: 20rpx;
+  border-bottom: 1rpx solid var(--white);
 }
-
 .user_content .user_main .orders_wrap .orders_content {
-    display: flex;
+  display: flex;
 }
-
 .user_content .user_main .orders_wrap navigator {
-    padding: 15rpx;
-    flex: 1;
-    text-align: center;
+  padding: 15rpx;
+  flex: 1;
+  text-align: center;
 }
-
 .user_content .user_main .orders_wrap navigator .iconfont {
-    color: var(--themeColor);
-    font-size: 50rpx;
+  color: var(--themeColor);
+  font-size: 50rpx;
 }
-
 .user_content .user_main .orders_wrap navigator .icon-ding_dan {
-    font-size: 50rpx;
+  font-size: 50rpx;
 }
-
 .user_content .user_main .address_wrap {
-    border-radius: 20rpx;
-    margin-top: 30rpx;
-    background-color: var(--white);
-    padding: 20rpx 0;
-    font-weight: 600;
+  border-radius: 20rpx;
+  margin-top: 30rpx;
+  background-color: var(--white);
+  padding: 20rpx 0;
+  font-weight: 600;
 }
-
 .user_content .user_main .app_info_warp {
-    border-radius: 20rpx;
-    margin-top: 30rpx;
-    background-color: var(--white);
-    font-weight: 600;
+  border-radius: 20rpx;
+  margin-top: 30rpx;
+  background-color: var(--white);
+  font-weight: 600;
 }
-
 .user_content .user_main .app_info_warp .app_info_item {
-    padding: 20rpx;
-    border-bottom: 1rpx solid #ccc;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #ccc;
 }
-
 .user_content .user_main .app_info_warp .app_info_contact {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
-
 .user_content .user_main .recommend_wrap {
-    border-radius: 20rpx;
-    margin-top: 30rpx;
-    background-color: var(--white);
-    padding: 20rpx;
-    border-bottom: 1rpx solid #ccc;
-    font-weight: 600;
+  border-radius: 20rpx;
+  margin-top: 30rpx;
+  background-color: var(--white);
+  padding: 20rpx;
+  border-bottom: 1rpx solid #ccc;
+  font-weight: 600;
 }
-
+.user_content .user_main .user_out {
+  margin-top: 30rpx;
+  background-color: var(--themeColor);
+}
 /*# sourceMappingURL=user.wxss.map */

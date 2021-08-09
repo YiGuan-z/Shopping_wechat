@@ -86,7 +86,7 @@ Page({
 		})
 	},
 	//点击加入购物车
-	handleCartAdd: function (e) {
+	handleCartAdd: function () {
 		//获取缓存中的数组
 		let cart = wx.getStorageSync('cart') || [];
 		//判断商品对象是否存在于购物车数组中

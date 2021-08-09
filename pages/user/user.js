@@ -17,7 +17,6 @@ Page({
 	},
 	
 	
-	
 	onShow() {
 		//商品收藏数量
 		const CollectNum = wx.getStorageSync('collect').length;

@@ -1,5 +1,5 @@
 //同时发送异步代码的次数
-let ajaxTimes=0;
+let ajaxTimes = 0;
 
 export const requst = (params) => {
 	ajaxTimes++;
@@ -20,7 +20,7 @@ export const requst = (params) => {
 			},
 			complete: () => {
 				ajaxTimes--;
-				if(ajaxTimes===0){
+				if (ajaxTimes === 0) {
 					//关闭正在等待
 					// setTimeout(() => wx.hideLoading(), 50 * 10)
 					wx.hideLoading()
