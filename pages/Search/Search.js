@@ -15,7 +15,7 @@
 import {requst} from "../../requst/index";
 
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
@@ -29,7 +29,7 @@ Page({
 	TimeId: null,
 	//输入框的值改变了触发的事件
 	handleInput(e) {
-		// let TimeId=null;
+		//从detal中结构获取value
 		const {value} = e.detail;
 		//合法性检查
 		if (!value.trim()) {
@@ -43,6 +43,7 @@ Page({
 		//发送请求获取数据
 		//防抖
 		this.setData({isFocus: true})
+		//清除定时器
 		clearTimeout(this.TimeId);
 		this.TimeId = setTimeout(() => {
 			this.qsearch(value);

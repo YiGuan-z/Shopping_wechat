@@ -34,7 +34,7 @@ Page({
 	},
 	//获取楼层数据
 	async getfloorList() {
-		const floorList = await requst({url: '/home/floordata'})
+		const floorList = await requst({url: '/home/floordata'});
 		floorList.forEach(v => {
 			v.product_list.forEach(v2 => {
 				v2.navigator_url = v2.navigator_url.replace(/\?/, '/goods_list\?')

@@ -24,7 +24,7 @@
 import {requst} from "../../requst/index.js";
 
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
@@ -52,13 +52,16 @@ Page({
 		
 		
 	},
+	//获取页面信息
 	async getGoodsDetail(goods_id) {
 		const goodsObj = await requst({url: '/goods/detail', data: {goods_id}})
+		//给GoodsInfo赋值
 		this.GoodsInfo = goodsObj;
 		//获取缓存中的商品收藏的数组
 		let collect = wx.getStorageSync('collect') || [];
 		//判断当前商品是否被收藏
 		let isCollect = collect.some(v => v.goods_id === this.GoodsInfo.goods_id);
+		//填充数据
 		this.setData({
 			goodsObj: {
 				goods_name: goodsObj.goods_name,
@@ -75,6 +78,7 @@ Page({
 	 * 点击轮播图放大预览
 	 */
 	handlePreviewImage: function (e) {
+		//花式打印
 		console.log("%c" + "预览", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
 		//1.构造需要预览的图片数组
 		const urls = this.GoodsInfo.pics.map(v => v.pics_mid);
@@ -82,7 +86,7 @@ Page({
 		wx.previewImage({
 			current,
 			urls
-			
+
 		})
 	},
 	//点击加入购物车
@@ -138,8 +142,10 @@ Page({
 		let currentPage = pages[pages.length - 1];
 		let options = currentPage.options;
 		let {goods_id} = options;
-		console.log(goods_id)
-		
+		console.log(goods_id);
+		wx.showLoading({title: '购买中', mask: true})
+		wx.showToast({title: '购买成功', icon: 'success', mask: true})
+		setTimeout(() => wx.hideLoading(), 50 * 10)
 	}
 	
 })

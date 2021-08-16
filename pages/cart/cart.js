@@ -55,15 +55,11 @@
 *   1.判断有没有收货地址
 *   2.判断用户有没有选购
 *   3.经过验证后跳转到支付页面
-*   4.
-*   5.
-*   6.
-*   7.
 * */
-import {chooseAddress, showModal, showToast/*, getSetting, openSetting*/} from '../../utils/asyncWx.js'
+import {chooseAddress, showModal, showToast} from '../../utils/asyncWx.js'
 
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
@@ -79,12 +75,12 @@ Page({
 		//商品的数量
 		totalNum: 0
 	},
-	
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-	
+
 	},
 	/*
 	* 页面加载完成
@@ -95,7 +91,7 @@ Page({
 		//获取缓存中的购物车数据
 		const cart = wx.getStorageSync('cart') || [];
 		//计算全选
-		//ever 数组方法，会遍历就收一个回掉函数，如果每一个回调函数都返回true，
+		//ever 数组方法，会遍历就收一个回调函数，如果每一个回调函数都返回true，
 		// 那么该函数返回true
 		//如果是一个空数组，返回值就是true
 		//如果数组长度为0就执行?后面的方法，否则就直接返回false
@@ -103,6 +99,7 @@ Page({
 		// const allChecked=cart.length?cart.every(v=>v.checked):false;
 		// //赋值
 		// this.setData({address, cart, allChecked, totalPrice, totalNum});
+		//自定义的set方法
 		this.setCart(cart)
 		this.setData({address})
 	},
@@ -111,6 +108,7 @@ Page({
 		try {
 			let address = await chooseAddress()
 			console.log(address)
+			//给address里的all字段封装四个属性
 			address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
 			//将用户地址存入缓存
 			wx.setStorageSync('address', address)
@@ -145,6 +143,7 @@ Page({
 		this.setCart(cart)
 	},
 	//设置购物车状态同时重新计算底部工具栏数据
+	//自定义的setData
 	setCart(cart) {
 		//计算商品价格
 		let allChecked = true;

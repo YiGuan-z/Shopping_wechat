@@ -1,10 +1,11 @@
 // pages/collect/collect.js
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
+		//自定义组件需要使用的数据
 		tabs: [
 			{
 				id: 0,
@@ -49,6 +50,7 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
+		//从缓存中获取collect
 		const collect = wx.getStorageSync('collect') || [];
 		this.setData({collect})
 		

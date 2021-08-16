@@ -11,11 +11,12 @@ import {requst} from "../../requst/index.js";
 * 5.数据回来了，关闭 等待效果
 * */
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
+		//自定义组件需要使用的数据
 		tabs: [
 			{
 				id: 0,
@@ -41,12 +42,12 @@ Page({
 	QueryParams: {
 		query: '',
 		cid: '',
-		pagenum: '1',
-		pagesize: '10'
+		pagenum: 1,
+		pagesize: 10
 	},
 	//总页数
 	totalPages: 1,
-	
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
@@ -78,19 +79,11 @@ Page({
 				const total = res.total;
 				//计算总页数
 				this.totalPages = Math.ceil(total / this.QueryParams.pagesize);
+				//拼接了数组 ...为扩展运算符
 				this.setData({goodsList: [...this.data.goodsList, ...res.goods]})
 			})
 		//关闭下拉刷新的窗口
 		wx.stopPullDownRefresh()
-		//获取总条数
-		// const total = res.total;
-		//计算总页数
-		// this.totalPages = Math.ceil(total / this.QueryParams.pagesize);
-		// .then(res => {
-		// 	this.setData({goodsList: res})
-		// })
-		//拼接了数组 ...为扩展运算符
-		// this.setData({goodsList:[ ...this.data.goodsList,...res.goods]})
 	},
 	
 	/**

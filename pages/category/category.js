@@ -1,7 +1,7 @@
 import {requst} from "../../requst/index.js";
 
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
@@ -16,7 +16,7 @@ Page({
 		scrollTop: 0
 	},
 	Cates: [],
-	
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
@@ -67,13 +67,15 @@ Page({
 		//使用es7的async发送异步请求
 		// const res=await requst({url: '/categories/'});
 		// this.Cates = res;
+		//data外的数据赋值
 		this.Cates = await requst({url: '/categories'});
-		//把接口的数据存入本地
+		//把接口获取的数据存入本地
 		wx.setStorageSync("cates", {time: Date.now(), data: this.Cates})
 		//构造左侧菜单数据
 		let leftMenuList = this.Cates.map(v => v.cat_name)
 		//构造右侧商品数据
 		let rightContent = this.Cates[0].children;
+		//填充数据
 		this.setData({leftMenuList, rightContent})
 	},
 	/*左侧菜单点击事件*/

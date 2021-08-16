@@ -12,11 +12,12 @@
 import {requst} from "../../requst/index.js";
 
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
+		//获取的数据
 		orders: [],
 		tabs: [
 			{
@@ -80,8 +81,6 @@ Page({
 		let {tabs} = this.data;
 		tabs.forEach((v, i) => i === index ? v.isActive = true : v.isActive = false)
 		//赋值到data
-		this.setData({
-			tabs
-		})
+		this.setData({tabs})
 	}
 })

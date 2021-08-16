@@ -3,7 +3,7 @@
 import {getUserProfile} from "../../utils/asyncWx";
 
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
@@ -17,8 +17,9 @@ Page({
 		try {
 			let userInfo = await getUserProfile({desc: '完善用户资料'})
 			this.setData({userInfo, hasUserInfo: true})
-			let user = {userInfo, hasUserInfo: true}
-			wx.setStorageSync('user', user)
+			let user = {userInfo, hasUserInfo: true};
+			wx.setStorageSync('user', user);
+			wx.setStorageSync('hasUserInfo', hasUserInfo);
 			wx.navigateBack({delta: 1})
 		} catch (err) {
 			console.log(err)
