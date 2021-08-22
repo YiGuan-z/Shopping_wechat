@@ -12,7 +12,7 @@
 * 4.
 *
 * */
-import {requst} from "../../requst/index";
+import {request} from "../../request/index";
 
 Page({
 
@@ -51,7 +51,7 @@ Page({
 	},
 	//发送请求获取搜索结果
 	async qsearch(query) {
-		const res = await requst({url: '/goods/qsearch', data: {query}})
+		const res = await request({url: '/goods/qsearch', data: {query}})
 		console.log(res)
 		this.setData({goods: res})
 	},

@@ -21,7 +21,7 @@
  *      2.已经存在，把该商品删除
  *      3.不存在，把该商品加入收藏数组中，再存入缓存
  */
-import {requst} from "../../requst/index.js";
+import {request} from "../../request/index.js";
 
 Page({
 
@@ -54,7 +54,7 @@ Page({
 	},
 	//获取页面信息
 	async getGoodsDetail(goods_id) {
-		const goodsObj = await requst({url: '/goods/detail', data: {goods_id}})
+		const goodsObj = await request({url: '/goods/detail', data: {goods_id}})
 		//给GoodsInfo赋值
 		this.GoodsInfo = goodsObj;
 		//获取缓存中的商品收藏的数组

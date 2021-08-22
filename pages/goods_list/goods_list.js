@@ -1,5 +1,5 @@
 // pages/goods_list/goods_list.js
-import {requst} from "../../requst/index.js";
+import {request} from "../../request/index.js";
 /*
 * 1.用户上滑页面，页面触底，开始加载下一页
 * 2.找到滚动条触底事件
@@ -73,7 +73,7 @@ Page({
 	},
 	//获取商品列表数据
 	async getGoodsList() {
-		await requst({url: '/goods/search', data: this.QueryParams})
+		await request({url: '/goods/search', data: this.QueryParams})
 			.then(res => {
 				//获取总条数
 				const total = res.total;

@@ -1,6 +1,6 @@
 //Page Object
 //引入发送请求的方法
-import {requst} from "../../requst/index.js";
+import {request} from "../../request/index.js";
 
 Page({
 	data: {
@@ -20,27 +20,26 @@ Page({
 		//3.调用导航栏数据
 		this.getCateList()
 		//4.调用楼层数据
-		this.getfloorList()
+		this.getFloorList()
 	},
 	//获取轮播图数据
 	async getSwiperList() {
-		const swiperList = await requst({url: '/home/swiperdata'})
+		const swiperList = await request({url: '/home/swiperdata'})
 		this.setData({swiperList})
 	},
 	//获取导航栏数据
 	async getCateList() {
-		const cateList = await requst({url: '/home/catitems'})
+		const cateList = await request({url: '/home/catitems'})
 		this.setData({cateList})
 	},
 	//获取楼层数据
-	async getfloorList() {
-		const floorList = await requst({url: '/home/floordata'});
+	async getFloorList() {
+		const floorList = await request({url: '/home/floordata'});
 		floorList.forEach(v => {
-			v.product_list.forEach(v2 => {
-				v2.navigator_url = v2.navigator_url.replace(/\?/, '/goods_list\?')
+			v.product_list.forEach(v1 => {
+				v1.navigator_url = v1.navigator_url.replace(/\?/, '/goods_list\?')
 			})
+			this.setData({floorList})
 		})
-		this.setData({floorList})
 	}
-	
-});
+})

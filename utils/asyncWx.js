@@ -94,7 +94,11 @@ export const login = () => {
 		})
 	})
 }
-//获取用户信息
+/**
+ * 获取用户信息
+ * @param desc 权限提示信息
+ * @returns {Promise<getUserProfile>}
+ */
 export const getUserProfile = ({desc}) => {
 	return new Promise((resolve, reject) => {
 		wx.getUserProfile({

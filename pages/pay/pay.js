@@ -14,7 +14,7 @@
  * 5.
  */
 import {showToast} from '../../utils/asyncWx.js'
-import {requst} from "../../requst/index.js"
+import {request} from "../../request/index.js"
 
 Page({
 	
@@ -95,7 +95,7 @@ Page({
 		}))
 		const orderParams = {order_price, consignee_addr, goods}
 		//准备发送请求创建订单，获取订单编号
-		const res = await requst({url: '/my/orders/create', header, data: orderParams, method: 'post'})
+		const res = await request({url: '/my/orders/create', header, data: orderParams, method: 'post'})
 		console.log(res);
 		//没有企业账号，模拟支付成功
 		const Pay = await showToast({title: '您已支付成功'})

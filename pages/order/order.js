@@ -9,7 +9,7 @@
 *   3.渲染页面
 *2.点击不同标题时需要重新发送请求获取新数据
 * */
-import {requst} from "../../requst/index.js";
+import {request} from "../../request/index.js";
 
 Page({
 
@@ -63,7 +63,7 @@ Page({
 	},
 	//获取订单列表的方法
 	async getOrders(type, header) {
-		const res = await requst({url: '/my/orders/all', data: {type}, header: header})
+		const res = await request({url: '/my/orders/all', data: {type}, header: header})
 		console.log(res)
 		this.setData({
 			orders: res.orders.map(v => ({
