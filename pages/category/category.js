@@ -1,7 +1,7 @@
-import {requst} from "../../requst/index.js";
+import {request} from "../../request/index.js";
 
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
@@ -16,7 +16,7 @@ Page({
 		scrollTop: 0
 	},
 	Cates: [],
-	
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
@@ -39,7 +39,7 @@ Page({
 			} else {
 				//可以使用旧数据
 				this.Cates = Cates.data;
-				console.log("本地缓存")
+				console.log("正在使用本地缓存")
 				//构造左侧菜单数据
 				let leftMenuList = this.Cates.map(v => v.cat_name)
 				//构造右侧商品数据
@@ -52,28 +52,15 @@ Page({
 	},
 	//获取分类数据
 	async getCategoryList() {
-		// requst({url: '/categories'})
-		// 	.then(res => {
-		// 		console.log(res)
-		// 		this.Cates = res.data.message;
-		// 		//把接口的数据存入本地
-		// 		wx.setStorageSync("cates",{time:Date.now(),data:this.Cates})
-		// 		//构造左侧菜单数据
-		// 		let leftMenuList = this.Cates.map(v => v.cat_name)
-		// 		//构造右侧商品数据
-		// 		let rightContent = this.Cates[0].children;
-		// 		this.setData({leftMenuList, rightContent})
-		// 	})
-		//使用es7的async发送异步请求
-		// const res=await requst({url: '/categories/'});
-		// this.Cates = res;
-		this.Cates = await requst({url: '/categories'});
-		//把接口的数据存入本地
+		//data外的数据赋值方式
+		this.Cates = await request({url: '/categories'});
+		//把接口获取的数据存入本地
 		wx.setStorageSync("cates", {time: Date.now(), data: this.Cates})
 		//构造左侧菜单数据
 		let leftMenuList = this.Cates.map(v => v.cat_name)
 		//构造右侧商品数据
 		let rightContent = this.Cates[0].children;
+		//填充数据
 		this.setData({leftMenuList, rightContent})
 	},
 	/*左侧菜单点击事件*/
@@ -83,7 +70,9 @@ Page({
 		2.给data中的currentIndex赋值
 		3.根据不同的索引渲染不同的内容
 		* */
+		//使用函数解构获取被点击的索引
 		const {index} = e.currentTarget.dataset;
+		//使用被点击的索引获取Cates里面的children对象
 		let rightContent = this.Cates[index].children;
 		this.setData({
 			currentIndex: index,

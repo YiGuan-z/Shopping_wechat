@@ -33,10 +33,10 @@ view {
   /*后四个超链接选择*/
 }
 .index_floor .floor_group .floor_list navigator:nth-last-child(-n+4) {
-  /*原图的宽高 232*386*/
-  height: calc(33.33vw*386/232/2);
-  border-left: 10rpx solid #fff;
-  /* 2 3 两个超链接 */
+    /*原图的宽高 232*386*/
+    height: calc(33.33vw * 386 / 232 / 2);
+    border-left: 10rpx solid #fff;
+    /* 2 3 两个超链接 */
 }
 .index_floor .floor_group .floor_list navigator:nth-last-child(-n+4):nth-child(2),
 .index_floor .floor_group .floor_list navigator:nth-last-child(-n+4):nth-child(3) {

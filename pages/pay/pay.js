@@ -14,10 +14,10 @@
  * 5.
  */
 import {showToast} from '../../utils/asyncWx.js'
-import {requst} from "../../requst/index.js"
+import {request} from "../../request/index.js"
 
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
@@ -30,13 +30,6 @@ Page({
 		totalPrice: 0,
 		//商品的数量
 		totalNum: 0
-	},
-	
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
-	onLoad: function (options) {
-	
 	},
 	/*
 	* 页面加载完成
@@ -95,10 +88,11 @@ Page({
 		}))
 		const orderParams = {order_price, consignee_addr, goods}
 		//准备发送请求创建订单，获取订单编号
-		const res = await requst({url: '/my/orders/create', header, data: orderParams, method: 'post'})
+		const res = await request({url: '/my/orders/create', header, data: orderParams, method: 'post'})
 		console.log(res);
 		//没有企业账号，模拟支付成功
 		const Pay = await showToast({title: '您已支付成功'})
+		setTimeout(() => wx.navigateBack({delta: 1}), 80 * 10)
 		console.log(Pay)
 	}
 	

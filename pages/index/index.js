@@ -1,6 +1,6 @@
 //Page Object
 //引入发送请求的方法
-import {requst} from "../../requst/index.js";
+import {request} from "../../request/index.js";
 
 Page({
 	data: {
@@ -20,27 +20,28 @@ Page({
 		//3.调用导航栏数据
 		this.getCateList()
 		//4.调用楼层数据
-		this.getfloorList()
+		this.getFloorList()
 	},
 	//获取轮播图数据
-	getSwiperList() {
-		requst({url: '/home/swiperdata'})
-			.then(res => {
-				this.setData({swiperList: res})
-			})
+	async getSwiperList() {
+		const swiperList = await request({url: '/home/swiperdata'})
+		this.setData({swiperList})
 	},
 	//获取导航栏数据
-	getCateList() {
-		requst({url: '/home/catitems'})
-			.then(res => {
-				this.setData({cateList: res})
-			})
+	async getCateList() {
+		const cateList = await request({url: '/home/catitems'})
+		this.setData({cateList})
 	},
 	//获取楼层数据
-	 getfloorList() {
-		requst({url: '/home/floordata'})
-			.then(res => {
-				this.setData({floorList: res})
+	async getFloorList() {
+		const floorList = await request({url: '/home/floordata'});
+		//将\?替换为/goods_list\?
+		floorList.forEach(v => {
+			v.product_list.forEach(v1 => {
+				v1.navigator_url = v1.navigator_url.replace(/\?/, '/goods_list\?')
 			})
+			//填充数据
+			this.setData({floorList})
+		})
 	}
-});
+})

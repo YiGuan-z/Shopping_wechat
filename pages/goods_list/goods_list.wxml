@@ -22,7 +22,6 @@
                     <view class="goods_price">
                         ¥{{item1.goods_price}}
                     </view>
-
                 </view>
             </navigator>
         </view>

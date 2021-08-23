@@ -21,11 +21,10 @@
  *      2.已经存在，把该商品删除
  *      3.不存在，把该商品加入收藏数组中，再存入缓存
  */
-import {requst} from "../../requst/index.js";
-import {showToast} from "../../utils/asyncWx";
+import {request} from "../../request/index.js";
 
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
@@ -42,29 +41,37 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onShow: function () {
-		//或得当前页面栈
+		//获得当前页面栈
 		let pages = getCurrentPages();
 		let currentPage = pages[pages.length - 1];
 		let options = currentPage.options;
 		//获取查询参数
 		const {goods_id} = options;
-		console.log(goods_id);
+		// console.log(goods_id);
+		//执行获取页面信息方法
 		this.getGoodsDetail(goods_id)
 		
 		
 	},
+	/**
+	 * 获取页面信息
+	 * @param goods_id 商品id
+	 * @returns {Promise<getGoodsDetail>}
+	 */
 	async getGoodsDetail(goods_id) {
-		const goodsObj = await requst({url: '/goods/detail', data: {goods_id}})
+		const goodsObj = await request({url: '/goods/detail', data: {goods_id}})
+		//给GoodsInfo赋值
 		this.GoodsInfo = goodsObj;
 		//获取缓存中的商品收藏的数组
 		let collect = wx.getStorageSync('collect') || [];
 		//判断当前商品是否被收藏
 		let isCollect = collect.some(v => v.goods_id === this.GoodsInfo.goods_id);
+		//填充数据
 		this.setData({
 			goodsObj: {
 				goods_name: goodsObj.goods_name,
 				goods_price: goodsObj.goods_price,
-				//webp格式配置
+				//webp格式配置，使用正则匹配webp修改成为jpg
 				goods_introduce: goodsObj.goods_introduce.replace(/\.webp/g, '.jpg'),
 				pics: goodsObj.pics
 			},
@@ -76,6 +83,7 @@ Page({
 	 * 点击轮播图放大预览
 	 */
 	handlePreviewImage: function (e) {
+		//花式打印
 		console.log("%c" + "预览", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
 		//1.构造需要预览的图片数组
 		const urls = this.GoodsInfo.pics.map(v => v.pics_mid);
@@ -83,11 +91,10 @@ Page({
 		wx.previewImage({
 			current,
 			urls
-			
 		})
 	},
 	//点击加入购物车
-	handleCartAdd: function (e) {
+	handleCartAdd: function () {
 		//获取缓存中的数组
 		let cart = wx.getStorageSync('cart') || [];
 		//判断商品对象是否存在于购物车数组中
@@ -134,9 +141,15 @@ Page({
 		
 	},
 	//立即购买
-	handleCartPurchase: function (e) {
-	
-	
+	handleCartPurchase() {
+		let pages = getCurrentPages();
+		let currentPage = pages[pages.length - 1];
+		let options = currentPage.options;
+		let {goods_id} = options;
+		console.log(goods_id);
+		wx.showLoading({title: '购买中', mask: true})
+		wx.showToast({title: '购买成功', icon: 'success', mask: true})
+		setTimeout(() => wx.hideLoading(), 50 * 10)
 	}
 	
 })

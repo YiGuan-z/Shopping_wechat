@@ -1,5 +1,5 @@
 // pages/goods_list/goods_list.js
-import {requst} from "../../requst/index.js";
+import {request} from "../../request/index.js";
 /*
 * 1.用户上滑页面，页面触底，开始加载下一页
 * 2.找到滚动条触底事件
@@ -11,11 +11,12 @@ import {requst} from "../../requst/index.js";
 * 5.数据回来了，关闭 等待效果
 * */
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
+		//自定义组件需要使用的数据
 		tabs: [
 			{
 				id: 0,
@@ -41,57 +42,50 @@ Page({
 	QueryParams: {
 		query: '',
 		cid: '',
-		pagenum: '1',
-		pagesize: '10'
+		pagenum: 1,
+		pagesize: 10
 	},
 	//总页数
 	totalPages: 1,
-	
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		this.QueryParams.cid = options.cid;
-		console.log(options)
+		//从页面被传入的数据中获取cid并赋值给QueryParams.cid
+		//有数据，则赋值，没有数据，则返回空字符串
+		this.QueryParams.cid = options.cid || "";
+		this.QueryParams.query = options.query || "";
+		// console.log(options)
 		//获取商品详情
 		this.getGoodsList();
 	},
-	
+
 	//标题的点击事件从子组件传递Приходи
 	tabsItemChange(e) {
-		// console.log(e)
+		//从点击事件中解构获取index
 		const {index} = e.detail;
-		//修改源数组
+		//修改自定义组件tabs所使用的数据
 		let {tabs} = this.data;
 		tabs.forEach((v, i) => i === index ? v.isActive = true : v.isActive = false)
 		//赋值到data
-		this.setData({
-			tabs
-		})
+		this.setData({tabs})
 	},
 	//获取商品列表数据
 	async getGoodsList() {
-		await requst({url: '/goods/search', data: this.QueryParams})
+		await request({url: '/goods/search', data: this.QueryParams})
 			.then(res => {
 				//获取总条数
 				const total = res.total;
 				//计算总页数
 				this.totalPages = Math.ceil(total / this.QueryParams.pagesize);
+				//拼接了数组 ...为扩展运算符
 				this.setData({goodsList: [...this.data.goodsList, ...res.goods]})
 			})
 		//关闭下拉刷新的窗口
 		wx.stopPullDownRefresh()
-		//获取总条数
-		// const total = res.total;
-		//计算总页数
-		// this.totalPages = Math.ceil(total / this.QueryParams.pagesize);
-		// .then(res => {
-		// 	this.setData({goodsList: res})
-		// })
-		//拼接了数组 ...为扩展运算符
-		// this.setData({goodsList:[ ...this.data.goodsList,...res.goods]})
 	},
-	
+
 	/**
 	 * 生命周期函数--监听页面上拉触底事件
 	 * */
@@ -99,20 +93,14 @@ Page({
 		//判断是否还有下一页
 		if (this.QueryParams.pagenum >= this.totalPages) {
 			//没有下一页数据
-			// wx.showLoading({title: '加载中'})
 			console.log("%c" + "没有下一页了", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
 			//关闭加载
-			// setTimeout(()=> wx.hideLoading(),200*10)
 			wx.showToast({title: '没有下一页了', icon: 'error'})
 		} else {
 			// 还有下一页数据
-			// wx.showLoading({title: '加载中'})
 			console.log("%c" + "有下一页数据", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
 			this.QueryParams.pagenum++;
 			this.getGoodsList();
-			// 关闭加载
-			// setTimeout(()=> wx.hideLoading(),200*10)
-			// wx.hideLoading();
 		}
 		
 		
@@ -122,9 +110,9 @@ Page({
 	 * */
 	onPullDownRefresh: function () {
 		console.log("%c" + "刷新", "color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,green)")
-		//重置goodsList为空
+		//重置goodsList为空数组
 		this.setData({goodsList: []})
-		//重置页码
+		//将页码重置为1
 		this.QueryParams.pagenum = 1;
 		//重新发送请求
 		this.getGoodsList();
