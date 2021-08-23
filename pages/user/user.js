@@ -1,5 +1,5 @@
 // pages/user/user.js
-import {getUserProfile, showToast} from "../../utils/asyncWx";
+import {getUserProfile, showModal, showToast} from "../../utils/asyncWx";
 
 Page({
 	
@@ -15,41 +15,33 @@ Page({
 		CollectNum: 0
 		
 	},
-	
-	
 	onShow() {
 		//商品收藏数量
 		const CollectNum = wx.getStorageSync('collect').length;
-		const userInfo = wx.getStorageSync('userInfo') || [];
-		if (JSON.stringify(userInfo).length === '{}') {
-			return;
-		} else {
-			this.setData({userInfo, hasUserInfo: true})
-		}
 		this.setData({CollectNum})
 	},
-	async handleUserLogin(e) {
-		wx.getUserInfo(e)
+	async handleUserLogin() {
 		try {
 			let userInfo = await getUserProfile({desc: '完善用户资料'})
 			this.setData({userInfo, hasUserInfo: true})
 			wx.setStorageSync('userInfo', userInfo)
-			console.log(e)
+			console.log('用户已登陆')
 		} catch (err) {
 			console.log(err)
 		}
 	},
-	//清除用户状态
-	handleLoginOut() {
-		this.setData({
-			userInfo: {},
-			hasUserInfo: false
-		})
-		wx.setStorageSync('userInfo', "")
-		setTimeout(() => {
-			showToast({title: '退出成功'})
-		}, 10 * 10)
+	//清除用户登陆状态
+	async handleLoginOut() {
+		const UserChoice = await showModal({content: '是否退出登陆？'})
+		if (UserChoice.confirm) {
+			this.setData({userInfo: {}, hasUserInfo: false})
+			wx.setStorageSync('userInfo', "")
+			setTimeout(() => {
+				showToast({title: '退出成功'})
+			}, 10 * 10)
+			console.log('用户已退出')
+		} else if (UserChoice.cancel) {
+			console.log('用户已取消')
+		}
 	}
-	
-	
 })

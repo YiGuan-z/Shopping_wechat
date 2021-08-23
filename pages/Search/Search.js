@@ -26,6 +26,7 @@ Page({
 		//输入框的值
 		inputValue: ""
 	},
+	//这是一个计时器，初始数据看心情
 	TimeId: null,
 	//输入框的值改变了触发的事件
 	handleInput(e) {
@@ -45,18 +46,21 @@ Page({
 		this.setData({isFocus: true})
 		//清除定时器
 		clearTimeout(this.TimeId);
+		//设置定时器
 		this.TimeId = setTimeout(() => {
 			this.qsearch(value);
 		}, 60 * 10)
 	},
 	//发送请求获取搜索结果
 	async qsearch(query) {
+		//获取搜索结果并填充到data
 		const res = await request({url: '/goods/qsearch', data: {query}})
 		console.log(res)
 		this.setData({goods: res})
 	},
 	//取消按钮事件
 	handleCancel() {
+		//重置所有数据
 		this.setData({
 			goods: [],
 			isFocus: false,

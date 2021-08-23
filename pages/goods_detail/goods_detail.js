@@ -47,12 +47,17 @@ Page({
 		let options = currentPage.options;
 		//获取查询参数
 		const {goods_id} = options;
-		console.log(goods_id);
+		// console.log(goods_id);
+		//执行获取页面信息方法
 		this.getGoodsDetail(goods_id)
 		
 		
 	},
-	//获取页面信息
+	/**
+	 * 获取页面信息
+	 * @param goods_id 商品id
+	 * @returns {Promise<getGoodsDetail>}
+	 */
 	async getGoodsDetail(goods_id) {
 		const goodsObj = await request({url: '/goods/detail', data: {goods_id}})
 		//给GoodsInfo赋值
@@ -66,7 +71,7 @@ Page({
 			goodsObj: {
 				goods_name: goodsObj.goods_name,
 				goods_price: goodsObj.goods_price,
-				//webp格式配置
+				//webp格式配置，使用正则匹配webp修改成为jpg
 				goods_introduce: goodsObj.goods_introduce.replace(/\.webp/g, '.jpg'),
 				pics: goodsObj.pics
 			},
@@ -86,7 +91,6 @@ Page({
 		wx.previewImage({
 			current,
 			urls
-
 		})
 	},
 	//点击加入购物车

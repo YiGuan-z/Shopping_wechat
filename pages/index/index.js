@@ -35,10 +35,12 @@ Page({
 	//获取楼层数据
 	async getFloorList() {
 		const floorList = await request({url: '/home/floordata'});
+		//将\?替换为/goods_list\?
 		floorList.forEach(v => {
 			v.product_list.forEach(v1 => {
 				v1.navigator_url = v1.navigator_url.replace(/\?/, '/goods_list\?')
 			})
+			//填充数据
 			this.setData({floorList})
 		})
 	}
