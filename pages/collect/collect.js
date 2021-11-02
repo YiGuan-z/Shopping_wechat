@@ -38,7 +38,6 @@ Page({
 		//从缓存中获取collect,如果没有数据，则返回一个空数组
 		const collect = wx.getStorageSync('collect') || [];
 		this.setData({collect})
-
 	},
 	
 	//标题的点击事件从子组件传递Приходи

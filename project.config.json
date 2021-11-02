@@ -35,10 +35,13 @@
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
-    "showES6CompileOption": false
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.19.2",
+  "libVersion": "2.20.0",
   "appid": "wx150c3eb769faa435",
   "projectname": "test002",
   "debugOptions": {

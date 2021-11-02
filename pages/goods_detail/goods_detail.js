@@ -24,7 +24,7 @@
 import {request} from "../../request/index.js";
 
 Page({
-
+	
 	/**
 	 * 页面的初始数据
 	 */
@@ -50,6 +50,7 @@ Page({
 		// console.log(goods_id);
 		//执行获取页面信息方法
 		this.getGoodsDetail(goods_id)
+			.then((res) => this.defaultPicture(res))
 		
 		
 	},
@@ -78,6 +79,7 @@ Page({
 			isCollect
 		})
 		console.log(goodsObj)
+		return goodsObj;
 	},
 	/**
 	 * 点击轮播图放大预览
@@ -150,6 +152,40 @@ Page({
 		wx.showLoading({title: '购买中', mask: true})
 		wx.showToast({title: '购买成功', icon: 'success', mask: true})
 		setTimeout(() => wx.hideLoading(), 50 * 10)
+	},
+	/**
+	 * 判断是否给没有图片的数组一个默认的图片
+	 * @param goodsObj data数组中的goodsObj
+	 */
+	defaultPicture(goodsObj) {
+		if (goodsObj.pics.length === 0) {
+			//设置图标路径
+			const NoImg = "../../icon/NoImg.jpg";
+			//创建pics数组
+			let pics = []
+			//创建img对象
+			const img = {
+				pics_big: NoImg,
+				pics_big_url: NoImg,
+				pics_mid: NoImg,
+				pics_mid_url: NoImg,
+				pics_sma: NoImg,
+				pics_sma_url: NoImg
+			}
+			//给pics数组插入六个重复的对象
+			for (let i = 0; i < 6; i++) {
+				pics.push(img);
+			}
+			this.setData({
+				goodsObj: {
+					//将传入的值重写一遍，不然只剩下一个pics属性
+					goods_name: goodsObj.goods_name,
+					goods_price: goodsObj.goods_price,
+					goods_introduce: goodsObj.goods_introduce,
+					pics
+				}
+			})
+		}
 	}
 	
 })

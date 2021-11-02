@@ -11,7 +11,7 @@ import {request} from "../../request/index.js";
 * 5.数据回来了，关闭 等待效果
 * */
 Page({
-
+	
 	/**
 	 * 页面的初始数据
 	 */
@@ -47,7 +47,7 @@ Page({
 	},
 	//总页数
 	totalPages: 1,
-
+	
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
@@ -60,7 +60,7 @@ Page({
 		//获取商品详情
 		this.getGoodsList();
 	},
-
+	
 	//标题的点击事件从子组件传递Приходи
 	tabsItemChange(e) {
 		//从点击事件中解构获取index
@@ -85,7 +85,7 @@ Page({
 		//关闭下拉刷新的窗口
 		wx.stopPullDownRefresh()
 	},
-
+	
 	/**
 	 * 生命周期函数--监听页面上拉触底事件
 	 * */
@@ -117,5 +117,25 @@ Page({
 		//重新发送请求
 		this.getGoodsList();
 	},
+	/**
+	 * 用户足迹，可以通过点击时传进来的参数放入缓存，计算方面交给user界面
+	 * @param e 通过页面传入的参数
+	 */
+	headle_user_footprint(e) {
+		// console.log(e)
+		//从缓存中获取数据
+		let cacheUserType = wx.getStorageSync("UserFootprint") || [];
+		//从点击传入的参数中结构获取userType
+		const {usertype} = e.currentTarget.dataset;
+		//通过缓存中的goods_id和传入的goods_id比较
+		let index = cacheUserType.findIndex(v =>
+			v.goods_id === usertype.goods_id
+		)
+		//如果结果为-1就证明数据不存在对获取到的缓存数据进行push操作
+		if (index === -1) {
+			cacheUserType.push(usertype)
+		}
+		wx.setStorageSync("UserFootprint", cacheUserType)
+	}
 	
 })

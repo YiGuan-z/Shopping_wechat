@@ -8,6 +8,8 @@
                        wx:for-index="index1"
                        wx:for-item="item1"
                        wx:key="goods_id"
+                       bindtap="headle_user_footprint"
+                       data-userType="{{item1}}"
                        url="/pages/goods_detail/goods_detail?goods_id={{item1.goods_id}}">
                 <!--图片容器-->
                 <view class="goods_img_wrap">

@@ -12,13 +12,19 @@ Page({
 		//用户是否登陆
 		hasUserInfo: false,
 		//收藏的商品数量
-		CollectNum: 0
+		CollectNum: 0,
+		//我的足迹
+		Footprint: 0
 		
 	},
 	onShow() {
 		//商品收藏数量
 		const CollectNum = wx.getStorageSync('collect').length;
-		this.setData({CollectNum})
+		const Footprint = wx.getStorageSync('UserFootprint').length;
+		this.setData({
+			CollectNum,
+			Footprint
+		})
 	},
 	async handleUserLogin() {
 		try {
