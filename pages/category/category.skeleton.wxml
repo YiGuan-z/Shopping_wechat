@@ -1,0 +1,208 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/11/3 下午4:08:18
+使用方法：
+在 /Users/caseycheng/tmp/WeChatRoot/test002/pages/category/category.wxml 引入模板
+
+```
+<import src="category.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 /Users/caseycheng/tmp/WeChatRoot/test002/pages/category/category.wxss 中引入样式
+```
+@import "./category.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+    <view class="sk-container">
+        <view class="cates">
+            <view is="components/SearchInput/SearchInput">
+                <view class="SearchInput--search_input">
+                    <navigator class="SearchInput--search_nav sk-transparent sk-text-14-2857-177 sk-text"
+                               open-type="navigate">搜索
+                    </navigator>
+                </view>
+            </view>
+            <view class="cates_container">
+                <scroll-view class="left_menu" scroll-y="true">
+                    <view class="menu_item sk-transparent sk-text-14-2857-676 sk-text" data-index="0">大家电
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-878 sk-text" data-index="1">热门推荐
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-478 sk-text" data-index="2">海外购
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-573 sk-text" data-index="3">苏宁房产
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-362 sk-text" data-index="4">手机相机
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-366 sk-text" data-index="5">电脑办公
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-500 sk-text" data-index="6">厨卫电器
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-415 sk-text" data-index="7">食品酒水
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-3 sk-text" data-index="8">居家生活
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-376 sk-text" data-index="9">厨房电器
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-411 sk-text" data-index="10">生活电器
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-908 sk-text" data-index="11">个护健康
+                    </view>
+                    <view class="menu_item active sk-transparent sk-text-14-2857-448 sk-text" data-index="12"
+                          style="border: none;">烹饪厨具
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-686 sk-text" data-index="13">家装建材
+                    </view>
+                    <view class="menu_item sk-transparent sk-text-14-2857-8 sk-text" data-index="14">奶粉尿裤
+                    </view>
+                </scroll-view>
+                <scroll-view class="right_content" scroll-top="0" scroll-y="true">
+                    <view class="goods_group">
+                        <view class="goods_title">
+                            <text class="delimiter sk-transparent sk-text-14-2857-322 sk-text">/</text>
+                            <text class="title sk-transparent sk-text-14-2857-55 sk-text">锅具</text>
+                            <text class="delimiter sk-transparent sk-text-14-2857-702 sk-text">/</text>
+                        </view>
+                        <view class="goods_list">
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-604 sk-text"
+                                      style="background-position-x: 50%;">蒸锅
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-719 sk-text"
+                                      style="background-position-x: 50%;">煎锅
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-807 sk-text"
+                                      style="background-position-x: 50%;">压力锅
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-741 sk-text"
+                                      style="background-position-x: 50%;">奶锅
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-801 sk-text"
+                                      style="background-position-x: 50%;">汤锅
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-545 sk-text"
+                                      style="background-position-x: 50%;">砂锅
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-421 sk-text"
+                                      style="background-position-x: 50%;">火锅
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-130 sk-text"
+                                      style="background-position-x: 50%;">苏泊尔
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-27 sk-text"
+                                      style="background-position-x: 50%;">爱仕达
+                                </view>
+                            </navigator>
+                            <navigator class="true">
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-576 sk-text"
+                                      style="background-position-x: 50%;">康宁
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-254 sk-text"
+                                      style="background-position-x: 50%;">炊大皇
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-674 sk-text"
+                                      style="background-position-x: 50%;">拉歌蒂尼
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-395 sk-text"
+                                      style="background-position-x: 50%;">摩意达
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-668 sk-text"
+                                      style="background-position-x: 50%;">珍珠生活
+                                </view>
+                            </navigator>
+                            <navigator class="true">
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-635 sk-text"
+                                      style="background-position-x: 50%;">菲仕乐
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-476 sk-text"
+                                      style="background-position-x: 50%;">美厨
+                                </view>
+                            </navigator>
+                        </view>
+                    </view>
+                    <view class="goods_group">
+                        <view class="goods_title">
+                            <text class="delimiter sk-transparent sk-text-14-2857-250 sk-text">/</text>
+                            <text class="title sk-transparent sk-text-14-2857-971 sk-text">刀剪菜板</text>
+                            <text class="delimiter sk-transparent sk-text-14-2857-68 sk-text">/</text>
+                        </view>
+                        <view class="goods_list">
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-871 sk-text"
+                                      style="background-position-x: 50%;">菜刀
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-571 sk-text"
+                                      style="background-position-x: 50%;">多功能刀
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                                <view class="goods_name sk-transparent sk-text-14-2857-899 sk-text"
+                                      style="background-position-x: 50%;">剪刀
+                                </view>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                            </navigator>
+                            <navigator>
+                                <image mode="widthFix" style="height: 45px;" class="sk-image"></image>
+                            </navigator>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</template>
