@@ -1,3 +1,5 @@
+<import src="category.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{rightContent.length<1}}"/>
 <view class="cates">
     <SearchInput></SearchInput>
     <view class="cates_container">
@@ -7,8 +9,8 @@
                   wx:for="{{leftMenuList}}"
                   wx:key="*this"
                   bindtap="handleItemTap"
-                  data-index="{{index}}"
-            >{{item}}
+                  data-index="{{index}}">
+                {{item}}
             </view>
         </scroll-view>
         <!--左侧菜结束-->

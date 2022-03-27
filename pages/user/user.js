@@ -1,6 +1,7 @@
 // pages/user/user.js
 import {getUserProfile, showModal, showToast} from "../../utils/asyncWx";
-
+//有Bug啦！要点击两次弹窗才能登陆退出
+//WDNMD 微信模拟器异常，手机测试一切正常
 Page({
 	
 	/**

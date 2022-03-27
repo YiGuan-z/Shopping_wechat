@@ -52,7 +52,6 @@ Page({
 		this.getGoodsDetail(goods_id)
 			.then((res) => this.defaultPicture(res))
 		
-		
 	},
 	/**
 	 * 获取页面信息
@@ -172,20 +171,27 @@ Page({
 				pics_sma: NoImg,
 				pics_sma_url: NoImg
 			}
+			
 			//给pics数组插入六个重复的对象
 			for (let i = 0; i < 6; i++) {
 				pics.push(img);
 			}
 			this.setData({
+				//将传入的值重写一遍，不然只剩下一个pics属性
+				//展开运算符万岁
 				goodsObj: {
-					//将传入的值重写一遍，不然只剩下一个pics属性
-					goods_name: goodsObj.goods_name,
-					goods_price: goodsObj.goods_price,
-					goods_introduce: goodsObj.goods_introduce,
+					...goodsObj,
+					// goods_name: goodsObj.goods_name,
+					// goods_price: goodsObj.goods_price,
+					// goods_introduce: goodsObj.goods_introduce,
 					pics
 				}
 			})
 		}
+	},
+	//这个方法用于反转某个数组
+	Arrayinversion(Array) {
+	
 	}
 	
 })

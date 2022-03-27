@@ -1,6 +1,7 @@
-/*
-* Promise 形式 getSetting
-* */
+/**
+ * 获取权限设置
+ * @returns {Promise<unknown>}
+ */
 export const getSetting = () => {
 	return new Promise((resolve, reject) => {
 		wx.getSetting({
@@ -45,14 +46,16 @@ export const openSetting = () => {
 }
 /**
  *
- * @param content param0参数
+ * @param content 提示的内容
+ * @param showCancel 是否显示取消按钮
  * @returns {Promise<showModal>}
  */
-export const showModal = ({content}) => {
+export const showModal = ({content, showCancel}) => {
 	return new Promise((resolve, reject) => {
 		wx.showModal({
 			title: '提示',
 			content: content,
+			showCancel: showCancel,
 			success: (res) => {
 				resolve(res);
 			},

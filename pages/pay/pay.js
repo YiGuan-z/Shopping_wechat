@@ -13,8 +13,8 @@
  * 4.
  * 5.
  */
-import {showToast} from '../../utils/asyncWx.js'
 import {request} from "../../request/index.js"
+import {showModal, showToast} from '../../utils/asyncWx.js'
 
 Page({
 
@@ -89,15 +89,17 @@ Page({
 		const orderParams = {order_price, consignee_addr, goods}
 		//准备发送请求创建订单，获取订单编号
 		const res = await request({url: '/my/orders/create', header, data: orderParams, method: 'post'})
-		console.log("订单创建成功" + {res});
+		console.log("订单创建成功" + res);
 		//如果存在订单号说明支付成功，清除购物车
-		if (res.order_number) {
+		const {order_number} = res;
+		if (order_number) {
 			wx.setStorageSync('cart', [])
+		} else {
+			await showToast({title: '订单创建失败'})
 		}
 		//没有企业账号，模拟支付成功
-		const Pay = await showToast({title: '您已支付成功'})
+		await showModal({content: "您已支付成功", showCancel: false})
 		setTimeout(() => wx.navigateBack({delta: 1}), 80 * 10)
-		console.log(Pay)
 	}
 	
 })
